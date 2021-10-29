@@ -16,7 +16,6 @@ namespace app
 {
     public class Startup
     {
-        readonly string Cors = "Cors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,15 +26,14 @@ namespace app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddCors(options => 
-            {
-                options.AddPolicy(name: Cors,
-                                  builder => 
-                                  {
-                                    builder.WithOrigins("*");
-                                  });
+            services.AddCors(options => {
+                options.AddPolicy("permitir",
+                    builder => 
+                    {
+                        builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                    });
             });
+         
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -57,7 +55,7 @@ namespace app
 
             app.UseRouting();
 
-            app.UseCors(Cors);
+            app.UseCors("permitir");
 
             app.UseAuthorization();
 

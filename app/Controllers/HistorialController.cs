@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using app.Models;
 using app.Models.Request;
+using Microsoft.AspNetCore.Cors;
 
 namespace app.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("permitir")]
     public class HistorialController : ControllerBase
     {
 
