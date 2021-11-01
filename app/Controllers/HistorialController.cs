@@ -64,5 +64,18 @@ namespace app.Controllers
                 return Ok("Datos modificados");
             }
         }   
+
+        [HttpDelete("{id}")]
+
+        public ActionResult Delete(int id) 
+        {
+            using(climadbContext db = new climadbContext())
+            {
+                Historial his = db.Historials.Find(id);
+                db.Historials.Remove(his);
+                db.SaveChanges();
+            }
+            return Ok("El registro ha sido eliminado");
+        }
     }
 }
